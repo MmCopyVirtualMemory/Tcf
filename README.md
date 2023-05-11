@@ -11,9 +11,9 @@ F3 0F 2C 05 ? ? ? ? 8B 15 ? ? ? ? 48 8D 35 ? ? ? ? 03 15 ? ? ? ? 48 FF C2 81 E2 
 "ERROR NAME SIZE EXCEEDED"
 74 09 48 8D 15 ? ? ? ? EB 16
 ```
-# Objects String:
+# Objects:
 ```
-NewObject with empty name can't be used to create default
+"NewObject with empty name can't be used to create default"
 ```
 
 # Offsets: 5/11/2023
