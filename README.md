@@ -1,3 +1,111 @@
 # Tcf
 The Cycle Frontier Reverse Engineering
 
+```cpp
+struct 
+{
+    //names
+    U64 gnames = 0x64BA480;
+    struct
+    {
+        U64 name_length = 0x8;
+        U64 name_start = 0x12;
+    }name_entry;
+    //world
+    U64 gworld = 0x6644868;
+    U64 dword1 = 0x6646884;
+    U64 dword2 = 0x6646890;
+    U64 dword3 = 0x6646870;
+    struct
+    {
+        U64 levels = 0x1f88; //Levels
+        U64 owning_game_instance = 0x2000; //OwningGameInstance
+    }world; //UWorld
+    struct
+    {
+        U64 actors = 0xC0;
+    }level; //ULevel
+    struct
+    {
+        U64 local_players = 0x60; //LocalPlayers
+    }game_instance; //UGameInstance
+    struct
+    {
+        U64 player_controller = 0x58; //PlayerController
+    }local_player; //ULocalPlayer
+    struct
+    {
+        U64 control_rotation = 0x0; //ControlRotation
+        U64 acknowledged_pawn = 0x2a0; //AcknowledgedPawn
+        U64 camera_manager = 0x330; //CameraManager
+        U64 runtime_weapon_component = 0x8c0; //m_runtimeWeaponComponent
+    }player_controller; //APlayerController
+    struct
+    {
+        U64 last_frame_camera_cache_private = 0x1970;//LastFrameCameraCachePrivate
+    }player_camera_manager; //APlayerCameraManager
+    struct
+    {
+        U64 comparison_index = 0x34; //Name.ComparisonIndex
+        U64 root_component = 0x178; //RootComponent
+    }actor; //AActor
+    struct
+    {
+        U64 player_state = 0x290; //PlayerState
+        U64 mesh = 0x2d0;
+        U64 health_component = 0x528;
+        U64 stamina_component = 0x748;
+    }character; //ACharater
+    struct
+    {
+        U64 relative_location = 0x128; //RelativeLocation
+    }scene_component; //USceneComponent
+    struct
+    {
+        U64 player_name_private = 0x370; //PlayerNamePrivate
+    }player_state; //APlayerState
+    struct
+    {
+        U64 component_to_world = 0x1f0;
+        U64 bone_array = 0x4e0;
+    }mesh;
+    struct 
+    {
+        U64 health = 0x2c8; //m_currentHealth
+    }health_component; //UYHealthComponent
+    struct 
+    {
+        U64 stamina = 0x140; //m_currentStamina
+    }stamina_component; //UYStaminaComponent
+    struct 
+    {
+        U64 current_weapon = 0x7c8; //
+    }weapon_component; //UYWeaponPlayerControllerRuntimeComponent
+    struct 
+    {
+        //spread
+        U64 default_weapon_spread = 0x84; //m_defaultWeaponSpread
+        U64 weapon_spread_increase_speed = 0x88; //m_weaponSpreadIncreaseSpeed
+        U64 weapon_spread_decrease_speed = 0x8C; //m_weaponSpreadDecreaseSpeed
+        U64 weapon_spread_max = 0x90; //m_weaponSpreadMax
+        //recoil
+    }weapon_data; //FYWeaponTuningDataTableRow
+}off;
+```
+
+Kewl Fnames:
+```
+PRO_PlayerCharacter_C
+YPickup_Base_BP_C | YPickup_QuestItem_BP_C | YPickUp_Mineral_BP_C
+YBagContainer_BP_C | AA_LootContainers_BP_C | AA_PowerUp_LootContainer_BP
+
+AIChar_GlowBeetle_Blast_BP_C | AIChar_GlowBeetle_Acid_BP_C
+AIChar_Strider_BP_C
+AIChar_Rattler_BP_C
+AIChar_Weremole_BP_C
+AIChar_Howler_BP_C
+
+AA_PowerUpBattery_BP_C
+```
+
+
