@@ -1,6 +1,22 @@
 # Tcf
 The Cycle Frontier Reverse Engineering
 
+# World:
+```
+"No world was found for object (%s) passed in to UEngine::GetWorldFromContextObject()."
+F3 0F 2C 05 ? ? ? ? 8B 15 ? ? ? ? 48 8D 35 ? ? ? ? 03 15 ? ? ? ? 48 FF C2 81 E2 ? ? ? ? C1 F8 05 F7 D0 48 98 48 25 ? ? ? ? 48 0B D0 48 8B 34 D6
+```
+# Names:
+```
+"ERROR NAME SIZE EXCEEDED"
+74 09 48 8D 15 ? ? ? ? EB 16
+```
+# Objects String:
+```
+NewObject with empty name can't be used to create default
+```
+
+# Offsets: 5/11/2023
 ```cpp
 struct 
 {
@@ -93,7 +109,7 @@ struct
 }off;
 ```
 
-Kewl Fnames:
+# Kewl Fnames:
 ```
 PRO_PlayerCharacter_C
 YPickup_Base_BP_C | YPickup_QuestItem_BP_C | YPickUp_Mineral_BP_C
