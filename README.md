@@ -124,11 +124,11 @@ AIChar_Howler_BP_C
 AA_PowerUpBattery_BP_C
 ```
 
-#WIP AutoUpdater Ft Python
+# WIP AutoUpdater Ft Python
 ```py
 prospect_file = open('Prospect-Win64-Shipping.exe.bin', 'rb')
 prospect = prospect_file.read()
-print("read to memory!")
+
 def CheckMatch(index, pattern, mask, size):
     comparison_index = 0
     while comparison_index < size:
