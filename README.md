@@ -126,18 +126,14 @@ AA_PowerUpBattery_BP_C
 
 #WIP AutoUpdater Ft Python
 ```py
-prospect_file = open('Prospect-Win64-Shipping.exe.bin', 'r')
+prospect_file = open('Prospect-Win64-Shipping.exe.bin', 'rb')
 prospect = prospect_file.read()
-
-print(prospect)
-print(prospect_file.tell())
-
-prospect_base = 0xdead
-
+print("read to memory!")
 def CheckMatch(index, pattern, mask, size):
     comparison_index = 0
     while comparison_index < size:
-        if mask[comparison_index] != '?' and pattern[comparison_index] != prospect[index + comparison_index]:
+        byte_match = ord(pattern[comparison_index]) == prospect[index + comparison_index]
+        if mask[comparison_index] != '?' and not byte_match:
             return False
         comparison_index+=1
     return True
@@ -151,10 +147,33 @@ def PatternScan(pattern, mask, size):
     return -1
 
 def Rva(instruction, size):
-    rip = prospect_base + instruction + size
-    rva = prospect[instruction - size] #need to read here
+    rip = instruction + size
+    dummy_byte_array = []
+    index = 0
+    while index < 4:
+        dummy_byte_array.append(prospect[instruction + size - 4 + index])
+        index+=1
+    rva = int.from_bytes(dummy_byte_array, "little", signed=False)
     return rip + rva
 
+world_cvttss2si_instruction = PatternScan(
+        "\xF3\x0F\x2C\x05\x00\x00\x00\x00\x8B\x15\x00\x00\x00\x00\x48\x8D\x35\x00\x00\x00\x00\x03\x15\x00\x00\x00\x00\x48\xFF\xC2\x81\xE2\x00\x00\x00\x00\xC1\xF8\x05\xF7\xD0\x48\x98\x48\x25\x00\x00\x00\x00\x48\x0B\xD0\x48\x8B\x34\xD6", 
+        "xxxx????xx????xxx????xx????xxxxx????xxxxxxxxx????xxxxxxx", 56)
+world_mov_instruction = world_cvttss2si_instruction + 8
+world_lea_instruction = world_mov_instruction + 6
+world_add_instruction = world_lea_instruction + 7
+dword1 = Rva(world_cvttss2si_instruction, 8)
+dword3 = Rva(world_mov_instruction, 6)
+gworld = Rva(world_lea_instruction, 7)
+dword2 = Rva(world_add_instruction, 6)
+print("U64 gworld = " + hex(gworld))
+print("U64 dword1 = " + hex(dword1))
+print("U64 dword2 = " + hex(dword2))
+print("U64 dword3 = " + hex(dword3))
 
-print(PatternScan("THIS", "xxxx", 4))
+names_lea_instruction = PatternScan(
+        "\x74\x09\x48\x8D\x15\x00\x00\x00\x00\xEB\x16", 
+        "xxxxx????xx", 11) + 2
+gnames = Rva(names_lea_instruction, 7)
+print("U64 gnames = " + hex(gnames))
 ```
