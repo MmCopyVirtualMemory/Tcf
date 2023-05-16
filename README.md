@@ -124,4 +124,37 @@ AIChar_Howler_BP_C
 AA_PowerUpBattery_BP_C
 ```
 
+#WIP AutoUpdater Ft Python
+```py
+prospect_file = open('Prospect-Win64-Shipping.exe.bin', 'r')
+prospect = prospect_file.read()
 
+print(prospect)
+print(prospect_file.tell())
+
+prospect_base = 0xdead
+
+def CheckMatch(index, pattern, mask, size):
+    comparison_index = 0
+    while comparison_index < size:
+        if mask[comparison_index] != '?' and pattern[comparison_index] != prospect[index + comparison_index]:
+            return False
+        comparison_index+=1
+    return True
+
+def PatternScan(pattern, mask, size):
+    index = 0
+    while index < prospect_file.tell() - size:
+        if CheckMatch(index, pattern, mask, size):
+            return index
+        index+=1
+    return -1
+
+def Rva(instruction, size):
+    rip = prospect_base + instruction + size
+    rva = prospect[instruction - size] #need to read here
+    return rip + rva
+
+
+print(PatternScan("THIS", "xxxx", 4))
+```
