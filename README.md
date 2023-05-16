@@ -166,14 +166,14 @@ dword1 = Rva(world_cvttss2si_instruction, 8)
 dword3 = Rva(world_mov_instruction, 6)
 gworld = Rva(world_lea_instruction, 7)
 dword2 = Rva(world_add_instruction, 6)
-print("U64 gworld = " + hex(gworld))
-print("U64 dword1 = " + hex(dword1))
-print("U64 dword2 = " + hex(dword2))
-print("U64 dword3 = " + hex(dword3))
+print("U64 gworld = " + hex(gworld) + ";")
+print("U64 dword1 = " + hex(dword1) + ";")
+print("U64 dword2 = " + hex(dword2) + ";")
+print("U64 dword3 = " + hex(dword3) + ";")
 
 names_lea_instruction = PatternScan(
         "\x74\x09\x48\x8D\x15\x00\x00\x00\x00\xEB\x16", 
         "xxxxx????xx", 11) + 2
 gnames = Rva(names_lea_instruction, 7)
-print("U64 gnames = " + hex(gnames))
+print("U64 gnames = " + hex(gnames) + + ";")
 ```
