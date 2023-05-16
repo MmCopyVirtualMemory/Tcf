@@ -21,17 +21,17 @@ F3 0F 2C 05 ? ? ? ? 8B 15 ? ? ? ? 48 8D 35 ? ? ? ? 03 15 ? ? ? ? 48 FF C2 81 E2 
 struct 
 {
     //names
-    U64 gnames = 0x64A3480;
+    U64 gnames = 0x64ada40;
     struct
     {
-        U64 name_length = 0xa;
-        U64 name_start = 0xe;
+        U64 name_length = 0x4;
+        U64 name_start = 0x8;
     }name_entry;
     //world
-    U64 gworld = 0x662D868;
-    U64 dword1 = 0x662F884;
-    U64 dword2 = 0x662F88C;
-    U64 dword3 = 0x662F874;
+    U64 gworld = 0x6638e28;
+    U64 dword1 = 0x663ae48;
+    U64 dword2 = 0x663ae54;
+    U64 dword3 = 0x663ae34;
     struct
     {
         U64 levels = 0x1f80; //Levels
