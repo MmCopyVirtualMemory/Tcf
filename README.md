@@ -6,6 +6,14 @@ The Cycle Frontier Reverse Engineering
 "No world was found for object (%s) passed in to UEngine::GetWorldFromContextObject()."
 F3 0F 2C 05 ? ? ? ? 8B 15 ? ? ? ? 48 8D 35 ? ? ? ? 03 15 ? ? ? ? 48 FF C2 81 E2 ? ? ? ? C1 F8 05 F7 D0 48 98 48 25 ? ? ? ? 48 0B D0 48 8B 34 D6
 ```
+
+### OwningGameInstance
+```
+"NewObject with empty name can't be used"
+48 89 B7 ? ? ? ? F3 0F 2C 05 ? ? ? ? 8B 15 ? ? ? ? 03 15 ? ? ? ? 48 FF C2 81 E2 ? ? ? ? C1 F8 05 F7 D0 48 98 48 25 ? ? ? ? 48 0B D0 
+```
+
+
 # Names:
 ```
 "ERROR NAME SIZE EXCEEDED"
@@ -21,21 +29,21 @@ F3 0F 2C 05 ? ? ? ? 8B 15 ? ? ? ? 48 8D 35 ? ? ? ? 03 15 ? ? ? ? 48 FF C2 81 E2 
 struct 
 {
     //names
-    U64 gnames = 0x64ada40;
+    U64 gnames = 0x64abe40;
     struct
     {
         U64 name_length = 0x4;
-        U64 name_start = 0x8;
+        U64 name_start = 0xa;
     }name_entry;
     //world
-    U64 gworld = 0x6638e28;
-    U64 dword1 = 0x663ae48;
-    U64 dword2 = 0x663ae54;
-    U64 dword3 = 0x663ae34;
+    U64 gworld = 0x6635298;
+    U64 dword1 = 0x66372b0;
+    U64 dword2 = 0x66372bc;
+    U64 dword3 = 0x66372a4;
     struct
     {
         U64 levels = 0x1f80; //Levels
-        U64 owning_game_instance = 0x2000; //OwningGameInstance
+        U64 owning_game_instance = 0x1ff8; //OwningGameInstance
     }world; //UWorld
     struct
     {
@@ -62,7 +70,7 @@ struct
     }player_camera_manager; //APlayerCameraManager
     struct
     {
-        U64 comparison_index = 0x30; //Name.ComparisonIndex
+        U64 comparison_index = 0x2c; //Name.ComparisonIndex
         U64 root_component = 0x170; //RootComponent
     }actor; //AActor
     struct
@@ -70,7 +78,7 @@ struct
         U64 player_state = 0x288; //PlayerState
         U64 mesh = 0x2c8;
         U64 health_component = 0x518;
-        U64 stamina_component = 0x748;
+        U64 stamina_component = 0x738;
     }character; //ACharater
     struct
     {
@@ -87,15 +95,15 @@ struct
     }mesh;
     struct 
     {
-        U64 health = 0x2f0; //m_currentHealth
+        U64 health = 0x2e0; //m_currentHealth
     }health_component; //UYHealthComponent
     struct 
     {
-        U64 stamina = 0x140; //m_currentStamina
+        U64 stamina = 0x138; //m_currentStamina
     }stamina_component; //UYStaminaComponent
     struct 
     {
-        U64 current_weapon = 0x7c8; //
+        U64 current_weapon = 0x7c8;
     }weapon_component; //UYWeaponPlayerControllerRuntimeComponent
     struct 
     {
@@ -105,6 +113,24 @@ struct
         U64 weapon_spread_decrease_speed = 0x8C; //m_weaponSpreadDecreaseSpeed
         U64 weapon_spread_max = 0x90; //m_weaponSpreadMax
         //recoil
+        U64 min_negative_recoil_x = 0x2C;
+        U64 max_negative_recoil_x = 0x30;
+        U64 min_recoil_y = 0x3C;
+        U64 max_recoil_y = 0x40;
+        U64 min_positive_recoil_x = 0x34;
+        U64 max_positive_recoil_x = 0x38;
+        U64 targeting_recoil_compensation_speed_multiplier = 0x54;
+        U64 single_fire_recoil_multiplier_x = 0x58;
+        U64 single_fire_recoil_multiplier_y = 0x5C;
+        U64 camera_recoil_compensation_speed_x = 0x44;
+        U64 camera_recoil_compensation_speed_y = 0x48;
+        U64 automatic_fire_crosshair_recoil_compensation_speed_x = 0x4C;
+        U64 automatic_fire_crosshair_recoil_compensation_speed_y = 0x50;
+        U64 recoil_compensation_start_time = 0x64;
+        U64 use_recoil_compensation = 0x60;
+        U64 targeting_recoil_multiplier = 0xF0;
+        U64 crouching_recoil_multiplier = 0xF4;
+        U64 fire_in_air_recoil_multiplier = 0xF8;
     }weapon_data; //FYWeaponTuningDataTableRow
 }off;
 ```
